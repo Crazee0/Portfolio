@@ -36,12 +36,66 @@ body {
     color: var(--text-primary);
     overflow-x: hidden;
     text-rendering: optimizeSpeed;
-    background-color: #000000; /* Fallback */
-    background-image: url('../images/e83993dfcbc774bc4d6a04af6195336b (1).jpg');
-    background-repeat: repeat;
-    background-size: auto; /* Don't resize - use original size for proper tiling */
-    background-attachment: fixed;
+    background-color: #000000 !important; /* Fallback */
+    background-image: url('../images/cross-bg.jpg') !important;
+    background-repeat: repeat !important;
+    background-size: 250px auto !important; /* Smaller size for more visible tiling */
+    background-attachment: fixed !important;
     position: relative;
+}
+
+/* Remove ALL background settings from other elements */
+* {
+    background-color: transparent !important;
+}
+
+/* Make a dark semi-transparent overlay behind content */
+.section {
+    min-height: 100vh;
+    padding: 8rem 0 4rem;
+    position: relative;
+    transition: all 0.5s ease-out;
+    background-color: rgba(0, 0, 0, 0.6) !important; /* Dark transparent overlay */
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+}
+
+/* Add higher contrast for hero section */
+.hero-section {
+    position: relative;
+    height: auto;
+    background-color: rgba(0, 0, 0, 0.7) !important; /* Darker for contrast */
+    padding: 20px 0;
+    overflow: visible;
+}
+
+/* Ensure the header is visible and doesn't block content */
+header {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1000;
+    padding: 1.5rem 0;
+    background-color: rgba(0, 0, 0, 0.8) !important; /* Dark for visibility */
+    border-bottom: 1px solid rgba(121, 40, 202, 0.2);
+}
+
+/* Ensure no fixed elements block the view */
+html, .container, #car-model-container {
+    background-color: transparent !important;
+}
+
+/* Disable any other background images or patterns */
+.bg-pattern, .wave-pattern, 
+body::before, body::after, 
+.hero-section::before, .hero-section::after {
+    display: none !important;
+}
+
+/* Override any properties that might override our settings */
+html {
+    background-color: #000000 !important;
+    background-image: none !important;
 }
 
 /* Remove all the transparency/overlay effects that might be hiding the background */
@@ -62,14 +116,6 @@ html {
     background-color: rgba(0, 0, 0, 0.5) !important; /* Semi-transparent black */
     backdrop-filter: blur(0px); /* Remove blur to show pattern */
     -webkit-backdrop-filter: blur(0px);
-}
-
-.hero-section {
-    position: relative;
-    height: auto;
-    background-color: rgba(0, 0, 0, 0.3) !important; /* More transparent for hero */
-    padding: 20px 0;
-    overflow: visible;
 }
 
 .hero-section::before {
