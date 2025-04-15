@@ -260,76 +260,81 @@ header .container {
     box-shadow: 0 2px 10px rgba(121, 40, 202, 0.5);
 }
 
+/* Add a transparent container for hero text */
 .hero-content {
     position: relative;
     z-index: 2;
-    padding: 20px;
+    padding: 30px;
     text-align: center;
+    background-color: rgba(0, 0, 0, 0.5) !important;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5) !important;
+    backdrop-filter: blur(3px) !important;
+    -webkit-backdrop-filter: blur(3px) !important;
+    margin: 20px auto;
+    max-width: 800px;
 }
 
+/* Style the main heading with a subtle border */
 .hero-hello {
     font-size: 3.5rem;
     font-weight: 700;
     margin-bottom: 2rem;
     display: flex;
     align-items: center;
+    justify-content: center;
     gap: 1rem;
-    text-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    text-shadow: 0 0 10px rgba(0, 0, 0, 0.8) !important;
+    padding: 15px;
+    border-radius: 8px;
+    background-color: rgba(0, 0, 0, 0.3) !important;
+    border-bottom: 3px solid var(--primary-color);
 }
 
-.hand-wave {
-    display: inline-block;
-    font-size: 3.5rem;
-    animation: wave 2s infinite;
-    transform-origin: 70% 70%;
-}
-
-@keyframes wave {
-    0% { transform: rotate(0deg); }
-    10% { transform: rotate(14deg); }
-    20% { transform: rotate(-8deg); }
-    30% { transform: rotate(14deg); }
-    40% { transform: rotate(-4deg); }
-    50% { transform: rotate(10deg); }
-    60% { transform: rotate(0deg); }
-    100% { transform: rotate(0deg); }
-}
-
-.gradient-text {
-    background: linear-gradient(to right, var(--primary-color), var(--secondary-color));
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    filter: drop-shadow(0 0 5px rgba(150, 0, 0, 0.5));
-}
-
+/* Style for profession text */
 .hero-subtitle {
     font-size: 1.4rem;
     color: var(--text-secondary);
     margin-bottom: 2rem;
     line-height: 1.8;
+    padding: 10px 20px;
+    background-color: rgba(0, 0, 0, 0.4) !important;
+    border-radius: 30px;
+    display: inline-block;
+    border: 1px solid rgba(255, 255, 255, 0.05);
 }
 
+/* Desktop notice box */
 .desktop-notice {
     margin-top: 2.5rem;
     padding: 1.5rem;
-    background: rgba(121, 40, 202, 0.15);
+    background: rgba(0, 0, 0, 0.6) !important;
     border-left: 4px solid var(--primary-color);
     border-radius: 5px;
     font-size: 1rem;
     color: var(--text-secondary);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3) !important;
 }
 
+/* Social links container */
 .social-links {
     display: flex;
     gap: 2rem;
     margin-top: 3rem;
+    justify-content: center;
+    padding: 15px;
+    background-color: rgba(0, 0, 0, 0.3) !important;
+    border-radius: 50px;
+    display: inline-flex;
 }
 
+/* Add glowing effect to social icons */
 .social-links a {
     color: var(--text-secondary);
     font-size: 1.8rem;
     transition: all 0.3s ease;
-    background: rgba(10, 10, 10, 0.7);
+    background: rgba(0, 0, 0, 0.5) !important;
     width: 55px;
     height: 55px;
     border-radius: 50%;
@@ -337,14 +342,16 @@ header .container {
     align-items: center;
     justify-content: center;
     border: 1px solid rgba(150, 0, 0, 0.2);
+    position: relative;
+    overflow: hidden;
 }
 
 .social-links a:hover {
     color: var(--secondary-color);
     transform: translateY(-5px);
-    background: rgba(19, 19, 19, 0.9);
-    border: 1px solid var(--primary-color);
-    box-shadow: 0 10px 20px rgba(150, 0, 0, 0.3), 0 0 15px rgba(255, 72, 0, 0.2);
+    background: rgba(19, 19, 19, 0.9) !important;
+    border: 1px solid var(--primary-color) !important;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5), 0 0 15px rgba(255, 72, 0, 0.3) !important;
 }
 
 .scroll-indicator {
@@ -1999,4 +2006,31 @@ img {
 .backdrop-filter-element {
     -webkit-backdrop-filter: blur(10px);
     backdrop-filter: blur(10px);
+}
+
+/* Restore animation for hand wave */
+.hand-wave {
+    display: inline-block;
+    font-size: 3.5rem;
+    animation: wave 2s infinite;
+    transform-origin: 70% 70%;
+}
+
+@keyframes wave {
+    0% { transform: rotate(0deg); }
+    10% { transform: rotate(14deg); }
+    20% { transform: rotate(-8deg); }
+    30% { transform: rotate(14deg); }
+    40% { transform: rotate(-4deg); }
+    50% { transform: rotate(10deg); }
+    60% { transform: rotate(0deg); }
+    100% { transform: rotate(0deg); }
+}
+
+/* Restore gradient text styling */
+.gradient-text {
+    background: linear-gradient(to right, var(--primary-color), var(--secondary-color));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    filter: drop-shadow(0 0 5px rgba(150, 0, 0, 0.5));
 } 
