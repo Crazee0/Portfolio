@@ -17,6 +17,7 @@ This is the source code for my personal portfolio website hosted at hcrry.com.
 - The website is built using HTML5, CSS3, and JavaScript
 - No build process required - files can be edited directly
 - Responsive design for all device sizes
+- Features a modern dark theme design
 
 ## Domain Setup
 Domain: hcrry.com
