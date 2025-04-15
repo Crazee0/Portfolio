@@ -14,6 +14,15 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Initialize form validation
     initFormValidation();
+    
+    // Initialize typing animation
+    initTypingAnimation();
+    
+    // Initialize interactive skills
+    initInteractiveSkills();
+    
+    // Initialize 3D certification cards
+    init3DCertifications();
 });
 
 // Initialize animations
@@ -23,6 +32,9 @@ function initAnimations() {
     if (wavePattern) {
         wavePattern.innerHTML = generateWavePattern();
     }
+    
+    // Add entrance animations to sections
+    animateSectionsOnScroll();
 }
 
 // Generate SVG wave pattern
@@ -53,6 +65,191 @@ function generateWavePattern() {
         </path>
     </svg>
     `;
+}
+
+// Initialize typing animation for the hero section
+function initTypingAnimation() {
+    const heroSection = document.querySelector('.hero-section');
+    if (!heroSection) return;
+    
+    // Replace static text with elements for typing animation
+    const heroHello = document.querySelector('.hero-hello');
+    if (heroHello) {
+        const originalContent = heroHello.innerHTML;
+        const nameElement = heroHello.querySelector('.gradient-text');
+        const name = nameElement ? nameElement.textContent : 'Alex Chen';
+        
+        // Create new structure for typing effect
+        heroHello.innerHTML = `Hi, I'm <span class="gradient-text" id="typed-name"></span><span class="hand-wave">👋</span>`;
+        
+        // Initialize Typed.js
+        const typedName = new Typed('#typed-name', {
+            strings: [name],
+            typeSpeed: 100,
+            backSpeed: 50,
+            backDelay: 5000,
+            smartBackspace: true,
+            loop: true,
+            showCursor: true,
+            cursorChar: '|',
+            autoInsertCss: true,
+        });
+    }
+    
+    // Create typing animation for subtitle
+    const heroSubtitle = document.querySelector('.hero-subtitle');
+    if (heroSubtitle) {
+        const subtitleText = heroSubtitle.textContent;
+        heroSubtitle.innerHTML = `<span id="typed-subtitle"></span>`;
+        
+        // Initialize Typed.js for subtitle
+        const typedSubtitle = new Typed('#typed-subtitle', {
+            strings: [subtitleText],
+            typeSpeed: 40,
+            startDelay: 1000,
+            backSpeed: 20,
+            backDelay: 10000,
+            smartBackspace: true,
+            loop: true,
+            showCursor: true,
+            cursorChar: '_',
+            autoInsertCss: true,
+        });
+    }
+}
+
+// Animate elements when they come into view
+function animateSectionsOnScroll() {
+    const sections = document.querySelectorAll('.section');
+    
+    sections.forEach(section => {
+        // Add the fade-in class to trigger CSS animation
+        section.classList.add('fade-in');
+    });
+    
+    const sectionTitles = document.querySelectorAll('.section-title');
+    
+    sectionTitles.forEach(title => {
+        // Add animation classes to titles
+        title.classList.add('slide-in-bottom');
+    });
+    
+    // Add element observers to trigger animations when scrolled into view
+    const observerOptions = {
+        threshold: 0.1,
+        rootMargin: '0px 0px -100px 0px'
+    };
+    
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('animate-in');
+                observer.unobserve(entry.target);
+            }
+        });
+    }, observerOptions);
+    
+    // Observe all elements with animation classes
+    document.querySelectorAll('.fade-in, .slide-in-bottom').forEach(element => {
+        observer.observe(element);
+    });
+}
+
+// Initialize interactive skill icons
+function initInteractiveSkills() {
+    const skillCards = document.querySelectorAll('.skill-card');
+    
+    skillCards.forEach(card => {
+        // Add 3D tilt effect on hover
+        card.addEventListener('mousemove', e => {
+            const rect = card.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+            
+            const centerX = rect.width / 2;
+            const centerY = rect.height / 2;
+            
+            const angleY = (x - centerX) / 10;
+            const angleX = (centerY - y) / 10;
+            
+            card.style.transform = `perspective(1000px) rotateX(${angleX}deg) rotateY(${angleY}deg) scale3d(1.05, 1.05, 1.05)`;
+            card.style.boxShadow = `
+                0 15px 35px rgba(0, 0, 0, 0.25),
+                ${angleY * 0.5}px ${angleX * -0.5}px 30px rgba(121, 40, 202, 0.2)
+            `;
+        });
+        
+        // Reset on mouse leave
+        card.addEventListener('mouseleave', () => {
+            card.style.transform = '';
+            card.style.boxShadow = '';
+        });
+    });
+    
+    // Add hover effects to skill items
+    const skillItems = document.querySelectorAll('.skill-item');
+    
+    skillItems.forEach(item => {
+        item.addEventListener('mouseenter', () => {
+            item.classList.add('skill-item-active');
+            const progressBar = item.querySelector('.skill-progress');
+            if (progressBar) {
+                progressBar.style.transform = 'scaleX(1.05)';
+                progressBar.style.boxShadow = '0 0 15px rgba(121, 40, 202, 0.5)';
+            }
+        });
+        
+        item.addEventListener('mouseleave', () => {
+            item.classList.remove('skill-item-active');
+            const progressBar = item.querySelector('.skill-progress');
+            if (progressBar) {
+                progressBar.style.transform = '';
+                progressBar.style.boxShadow = '';
+            }
+        });
+    });
+}
+
+// Initialize 3D rotating certification cards
+function init3DCertifications() {
+    // Create a container for 3D certifications
+    const timelineItems = document.querySelectorAll('.timeline-item');
+    
+    timelineItems.forEach(item => {
+        const content = item.querySelector('.timeline-content');
+        if (!content) return;
+        
+        // Add 3D effect on hover
+        content.addEventListener('mousemove', e => {
+            const rect = content.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+            
+            const centerX = rect.width / 2;
+            const centerY = rect.height / 2;
+            
+            const angleY = (x - centerX) / 14;
+            const angleX = (centerY - y) / 14;
+            
+            content.style.transform = `perspective(1000px) rotateX(${angleX}deg) rotateY(${angleY}deg) translateZ(10px)`;
+            content.style.boxShadow = `
+                0 15px 35px rgba(0, 0, 0, 0.3),
+                ${angleY * 0.5}px ${angleX * -0.5}px 20px rgba(121, 40, 202, 0.2)
+            `;
+        });
+        
+        // Reset on mouse leave
+        content.addEventListener('mouseleave', () => {
+            content.style.transform = 'translateY(-5px)';
+            content.style.boxShadow = '0 12px 40px rgba(0, 0, 0, 0.3)';
+        });
+        
+        // Special badge
+        const badge = document.createElement('div');
+        badge.className = 'certification-badge';
+        badge.innerHTML = '<i class="fas fa-award"></i>';
+        content.appendChild(badge);
+    });
 }
 
 // Initialize scroll effects
