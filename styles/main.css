@@ -31,15 +31,54 @@
 }
 
 body {
-    background-color: #000000;
+    margin: 0;
+    padding: 0;
     color: var(--text-primary);
     overflow-x: hidden;
     text-rendering: optimizeSpeed;
-    background-image: url('../images/backgrounds/cross-pattern.jpg');
+    background-color: #000000; /* Fallback */
+    background-image: url('../images/e83993dfcbc774bc4d6a04af6195336b (1).jpg');
     background-repeat: repeat;
-    background-size: 300px auto; /* Make pattern smaller/more dense */
+    background-size: auto; /* Don't resize - use original size for proper tiling */
     background-attachment: fixed;
     position: relative;
+}
+
+/* Remove all the transparency/overlay effects that might be hiding the background */
+body::after {
+    display: none !important;
+}
+
+html {
+    background-color: #000000 !important;
+}
+
+/* Make sections transparent with a light dark overlay for readability */
+.section {
+    min-height: 100vh;
+    padding: 8rem 0 4rem;
+    position: relative;
+    transition: all 0.5s ease-out;
+    background-color: rgba(0, 0, 0, 0.5) !important; /* Semi-transparent black */
+    backdrop-filter: blur(0px); /* Remove blur to show pattern */
+    -webkit-backdrop-filter: blur(0px);
+}
+
+.hero-section {
+    position: relative;
+    height: auto;
+    background-color: rgba(0, 0, 0, 0.3) !important; /* More transparent for hero */
+    padding: 20px 0;
+    overflow: visible;
+}
+
+.hero-section::before {
+    background: rgba(0, 0, 0, 0.3) !important; /* More transparent */
+}
+
+/* Make header slightly transparent to show background */
+header {
+    background-color: rgba(0, 0, 0, 0.7) !important;
 }
 
 /* Remove the bg-pattern div completely from DOM */
@@ -68,38 +107,6 @@ body::after {
     background: rgba(0, 0, 0, 0.5); /* More transparent overlay */
     z-index: -1;
     pointer-events: none;
-}
-
-/* Make sections more transparent to show the background pattern */
-.section {
-    min-height: 100vh;
-    padding: 8rem 0 4rem;
-    position: relative;
-    transition: all 0.5s ease-out;
-    background-color: rgba(0, 0, 0, 0.4) !important; /* More transparent */
-    backdrop-filter: blur(1px);
-    -webkit-backdrop-filter: blur(1px);
-}
-
-/* Make hero section more transparent */
-.hero-section {
-    position: relative;
-    height: auto;
-    background-color: rgba(0, 0, 0, 0.4) !important; /* More transparent */
-    padding: 20px 0;
-    overflow: visible;
-}
-
-/* Adjust hero section overlay */
-.hero-section::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.4) !important; /* More transparent */
-    z-index: 1;
 }
 
 /* Ensure car model container doesn't block background */
