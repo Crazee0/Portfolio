@@ -1,4 +1,12 @@
 .DS_Store
 node_modules/
 .env
-*.log 
+*.log
+
+# Exclude large model files
+models/car.obj
+models/car.glb
+models/car.mtl
+models/*.obj
+models/*.glb
+models/*.mtl 

@@ -67,53 +67,54 @@ function generateWavePattern() {
     `;
 }
 
+// Store Typed.js instances to prevent reinitializing
+let nameTypingInstance = null;
+let professionTypingInstance = null;
+
 // Initialize typing animation for the hero section
 function initTypingAnimation() {
-    const heroSection = document.querySelector('.hero-section');
-    if (!heroSection) return;
-    
-    // Replace static text with elements for typing animation
-    const heroHello = document.querySelector('.hero-hello');
-    if (heroHello) {
-        const originalContent = heroHello.innerHTML;
-        const nameElement = heroHello.querySelector('.gradient-text');
-        const name = nameElement ? nameElement.textContent : 'Alex Chen';
+    // Name typing animation - only initialize once
+    if (document.querySelector('.hero-hello') && !nameTypingInstance) {
+        // First, ensure the element is empty before initializing
+        document.querySelector('.hero-hello span.gradient-text').textContent = '';
         
-        // Create new structure for typing effect
-        heroHello.innerHTML = `Hi, I'm <span class="gradient-text" id="typed-name"></span><span class="hand-wave">👋</span>`;
-        
-        // Initialize Typed.js
-        const typedName = new Typed('#typed-name', {
-            strings: [name],
-            typeSpeed: 100,
-            backSpeed: 50,
-            backDelay: 5000,
-            smartBackspace: true,
-            loop: true,
-            showCursor: true,
-            cursorChar: '|',
+        nameTypingInstance = new Typed('.hero-hello span.gradient-text', {
+            strings: ['Harry'],
+            typeSpeed: 400,
+            showCursor: false,
+            startDelay: 800,
+            loop: false,
+            smartBackspace: false,
             autoInsertCss: true,
+            onComplete: function() {
+                document.querySelector('.hand-wave').classList.add('wave');
+            }
         });
     }
     
-    // Create typing animation for subtitle
-    const heroSubtitle = document.querySelector('.hero-subtitle');
-    if (heroSubtitle) {
-        const subtitleText = heroSubtitle.textContent;
-        heroSubtitle.innerHTML = `<span id="typed-subtitle"></span>`;
-        
-        // Initialize Typed.js for subtitle
-        const typedSubtitle = new Typed('#typed-subtitle', {
-            strings: [subtitleText],
-            typeSpeed: 40,
-            startDelay: 1000,
-            backSpeed: 20,
-            backDelay: 10000,
-            smartBackspace: true,
+    // Profession typing animation
+    if (document.querySelector('#typed-profession') && !professionTypingInstance) {
+        professionTypingInstance = new Typed('#typed-profession', {
+            strings: [
+                'Full Stack Developer',
+                'Frontend Engineer',
+                'JavaScript Expert',
+                'React Developer',
+                'UI/UX Enthusiast',
+                'Web Developer',
+                'Tech Enthusiast',
+                'Problem Solver'
+            ],
+            typeSpeed: 120,
+            backSpeed: 80,
+            backDelay: 1500,
+            startDelay: 1800,
             loop: true,
-            showCursor: true,
-            cursorChar: '_',
+            smartBackspace: false,
+            cursorChar: '|',
             autoInsertCss: true,
+            fadeOut: false,
+            showCursor: true
         });
     }
 }
