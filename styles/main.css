@@ -37,19 +37,27 @@ body {
     text-rendering: optimizeSpeed;
     background-image: url('../images/backgrounds/cross-pattern.jpg');
     background-repeat: repeat;
-    background-size: 400px auto; /* Adjust size to make pattern larger */
+    background-size: 300px auto; /* Make pattern smaller/more dense */
     background-attachment: fixed;
     position: relative;
 }
 
+/* Remove the bg-pattern div completely from DOM */
 .bg-pattern {
-    display: none;
+    display: none !important;
 }
 
+/* Remove the wave-pattern div completely from DOM */
+.wave-pattern {
+    display: none !important;
+}
+
+/* Remove the body::before as it may be blocking our pattern */
 body::before {
-    display: none;
+    display: none !important;
 }
 
+/* Ensure the overlay doesn't block the background pattern */
 body::after {
     content: '';
     position: fixed;
@@ -57,19 +65,56 @@ body::after {
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0, 0, 0, 0.7); /* Dark overlay for readability */
+    background: rgba(0, 0, 0, 0.5); /* More transparent overlay */
     z-index: -1;
     pointer-events: none;
 }
 
-.wave-pattern {
-    position: fixed;
+/* Make sections more transparent to show the background pattern */
+.section {
+    min-height: 100vh;
+    padding: 8rem 0 4rem;
+    position: relative;
+    transition: all 0.5s ease-out;
+    background-color: rgba(0, 0, 0, 0.4) !important; /* More transparent */
+    backdrop-filter: blur(1px);
+    -webkit-backdrop-filter: blur(1px);
+}
+
+/* Make hero section more transparent */
+.hero-section {
+    position: relative;
+    height: auto;
+    background-color: rgba(0, 0, 0, 0.4) !important; /* More transparent */
+    padding: 20px 0;
+    overflow: visible;
+}
+
+/* Adjust hero section overlay */
+.hero-section::before {
+    content: "";
+    position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    z-index: -2;
-    opacity: 0.15;
+    background: rgba(0, 0, 0, 0.4) !important; /* More transparent */
+    z-index: 1;
+}
+
+/* Ensure car model container doesn't block background */
+#car-model-container {
+    position: relative;
+    width: 100%;
+    height: 40vh;
+    background: rgba(0, 0, 0, 0.3) !important; /* More transparent */
+    overflow: hidden;
+    z-index: 1;
+}
+
+/* Override any other background colors */
+html {
+    background-color: transparent !important;
 }
 
 .container {
@@ -160,35 +205,6 @@ header .container {
     width: 100%;
     transform: translateY(-2px);
     box-shadow: 0 2px 10px rgba(121, 40, 202, 0.5);
-}
-
-.section {
-    min-height: 100vh;
-    padding: 8rem 0 4rem;
-    position: relative;
-    transition: all 0.5s ease-out;
-    background-color: rgba(10, 10, 10, 0.6);
-    backdrop-filter: blur(2px);
-    -webkit-backdrop-filter: blur(2px);
-}
-
-.hero-section {
-    position: relative;
-    height: auto;
-    background-color: rgba(26, 26, 26, 0.7);
-    padding: 20px 0;
-    overflow: visible;
-}
-
-.hero-section::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.7);
-    z-index: 1;
 }
 
 .hero-content {
