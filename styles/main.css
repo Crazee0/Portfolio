@@ -1,10 +1,10 @@
 :root {
-    --primary-color: #7928ca;
-    --secondary-color: #ff0080;
-    --dark-bg: #06061a;
-    --card-bg: #0c0c28;
+    --primary-color: #9c0000;
+    --secondary-color: #ff4800;
+    --dark-bg: #0a0a0a;
+    --card-bg: #121212;
     --text-primary: #ffffff;
-    --text-secondary: #b3b3cc;
+    --text-secondary: #aaaaaa;
     --animation-duration: 0.5s;
     --animation-timing: cubic-bezier(0.215, 0.61, 0.355, 1);
 }
@@ -15,12 +15,26 @@
     box-sizing: border-box;
     font-family: 'Poppins', sans-serif;
     scroll-behavior: smooth;
+    animation: none !important;
+    transition: none !important;
+    transform: none !important;
+    will-change: auto !important;
+    backface-visibility: visible !important;
+    perspective: none !important;
+    transform-style: flat !important;
+    filter: none !important;
+    backdrop-filter: none !important;
+    text-shadow: none !important;
+    box-shadow: none !important;
+    background-attachment: scroll !important;
 }
 
 body {
     background-color: var(--dark-bg);
     color: var(--text-primary);
     overflow-x: hidden;
+    background-image: linear-gradient(to bottom, #0a0a0a, #111111 85%, #1a0e0c);
+    text-rendering: optimizeSpeed;
 }
 
 .bg-pattern {
@@ -30,7 +44,7 @@ body {
     width: 100%;
     height: 100%;
     z-index: -1;
-    opacity: 0.15;
+    opacity: 0.08;
     background-image: 
         radial-gradient(var(--primary-color) 1px, transparent 1px),
         radial-gradient(var(--secondary-color) 1px, transparent 1px);
@@ -55,7 +69,7 @@ body {
     width: 100%;
     height: 100%;
     z-index: -2;
-    opacity: 0.2;
+    opacity: 0.15;
 }
 
 .container {
@@ -156,27 +170,29 @@ header .container {
 }
 
 .hero-section {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    min-height: 100vh;
-    padding-top: 0;
     position: relative;
+    height: auto;
+    background-color: #1a1a1a;
+    padding: 20px 0;
+    overflow: visible;
+}
+
+.hero-section::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    z-index: 1;
 }
 
 .hero-content {
-    max-width: 900px;
-    margin: 0 auto;
-    padding: 3rem;
     position: relative;
-    z-index: 1;
-    background: rgba(10, 10, 32, 0.4);
-    backdrop-filter: blur(5px);
-    -webkit-backdrop-filter: blur(5px);
-    border-radius: 15px;
-    border: 1px solid rgba(121, 40, 202, 0.2);
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
-    transform: translateY(-20px);
+    z-index: 2;
+    padding: 20px;
+    text-align: center;
 }
 
 .hero-hello {
@@ -186,6 +202,7 @@ header .container {
     display: flex;
     align-items: center;
     gap: 1rem;
+    text-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
 }
 
 .hand-wave {
@@ -210,6 +227,7 @@ header .container {
     background: linear-gradient(to right, var(--primary-color), var(--secondary-color));
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
+    filter: drop-shadow(0 0 5px rgba(150, 0, 0, 0.5));
 }
 
 .hero-subtitle {
@@ -239,22 +257,22 @@ header .container {
     color: var(--text-secondary);
     font-size: 1.8rem;
     transition: all 0.3s ease;
-    background: rgba(19, 19, 43, 0.5);
+    background: rgba(10, 10, 10, 0.7);
     width: 55px;
     height: 55px;
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
-    border: 1px solid rgba(121, 40, 202, 0.2);
+    border: 1px solid rgba(150, 0, 0, 0.2);
 }
 
 .social-links a:hover {
-    color: var(--primary-color);
+    color: var(--secondary-color);
     transform: translateY(-5px);
-    background: rgba(19, 19, 43, 0.8);
+    background: rgba(19, 19, 19, 0.9);
     border: 1px solid var(--primary-color);
-    box-shadow: 0 10px 20px rgba(121, 40, 202, 0.3);
+    box-shadow: 0 10px 20px rgba(150, 0, 0, 0.3), 0 0 15px rgba(255, 72, 0, 0.2);
 }
 
 .scroll-indicator {
@@ -1122,6 +1140,18 @@ footer {
     .projects-grid {
         grid-template-columns: 1fr;
     }
+
+    .car-model-container {
+        height: 30vh;
+    }
+
+    .car-model-container canvas {
+        transform: scale(1.0);
+    }
+
+    .hero-content {
+        padding-top: 20vh;
+    }
 }
 
 @media (max-width: 480px) {
@@ -1582,27 +1612,319 @@ footer {
     }
 }
 
-/* 3D car model styles */
+/* 3D car model styles - ultra simplified */
 #car-model-container {
     position: absolute;
+    width: 100%;
+    height: 70vh;
     top: 0;
     left: 0;
-    width: 100%;
-    height: 80vh;
-    z-index: 0;
-    pointer-events: none;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    overflow: visible;
-    backdrop-filter: none;
-    -webkit-backdrop-filter: none;
-    opacity: 0.8;
+    z-index: 3;
+    background: radial-gradient(circle at center, rgba(0, 0, 0, 0.4) 0%, rgba(0, 0, 0, 0.7) 70%);
+    border: 1px solid rgba(255, 0, 0, 0.3);
+    box-shadow: 0 0 20px rgba(255, 0, 0, 0.3);
 }
 
 #car-model-container canvas {
     width: 100% !important;
     height: 100% !important;
+    transform: scale(1.5);
+    filter: drop-shadow(0 0 10px rgba(255, 0, 0, 0.5));
+}
+
+@media (max-width: 768px) {
+    #car-model-container {
+        height: 50vh;
+    }
+    
+    #car-model-container canvas {
+        transform: scale(1.2);
+    }
+}
+
+/* Removed spotlight effect */
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    #car-model-container {
+        height: 30vh;
+    }
+
+    #car-model-container canvas {
+        transform: scale(1.0);
+    }
+
+    .hero-content {
+        padding-top: 20vh;
+    }
+}
+
+/* Removed dramatic light beams */
+
+/* Removed floor reflection effect */
+
+/* Simplified overlay */
+.hero-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    z-index: 1;
+}
+
+/* Remove parallax effects */
+.parallax-bg {
+    background-attachment: scroll;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+/* Disable all animations */
+@keyframes none {
+    from { }
+    to { }
+}
+
+* {
+    animation: none !important;
+    transition: none !important;
+}
+
+/* Optimize all image rendering */
+img, video, canvas {
+    image-rendering: optimizeSpeed;
+}
+
+/* Optimize text rendering */
+body {
+    text-rendering: optimizeSpeed;
+    color: #fff;
+    background: #000;
+}
+
+/* Bare minimum styling for buttons */
+.button {
+    display: inline-block;
+    padding: 10px 20px;
+    margin: 10px;
+    background-color: #444;
+    color: white;
+    text-decoration: none;
+    border: none;
+}
+
+/* Remove all parallax effects */
+.parallax {
+    background-attachment: scroll !important;
+    background-position: center !important;
+    background-repeat: no-repeat !important;
+    background-size: cover !important;
+}
+
+/* Force single-threaded rendering where possible */
+.performance-critical {
+    contain: content;
+}
+
+/* Completely disable all scroll effects */
+.scroll-animate {
+    opacity: 1 !important;
+    transform: none !important;
+}
+
+/* Optimization mode - disable all animations */
+* {
+    animation: none !important;
+    transition: none !important;
+    transform: none !important;
+    will-change: auto !important;
+    perspective: none !important;
+    filter: none !important;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+}
+
+/* Disable all fixed position elements */
+.fixed, 
+.sticky,
+[class*="fixed-"],
+[class*="sticky-"] {
+    position: static !important;
+}
+
+/* Basic reset for performance */
+html, body {
+    overflow-x: hidden;
+    height: auto;
+    width: 100%;
+}
+
+/* Extremely simplified car model container */
+.car-model-container {
+    height: 300px;
+    width: 100%;
+    position: relative;
+    overflow: hidden;
+    background: #000;
+}
+
+.car-model-container canvas {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: contain;
+}
+
+/* Simplified hero section */
+.hero-section {
+    min-height: 50vh;
+    padding: 2rem 1rem;
+    text-align: center;
+    background: #000;
+    color: #fff;
+}
+
+/* Optimize images */
+img {
+    image-rendering: optimizeSpeed;
+}
+
+/* Disable parallax */
+.parallax {
+    background-attachment: scroll !important;
+}
+
+/* Extremely simple button style */
+.btn {
+    display: inline-block;
+    padding: 0.5rem 1rem;
+    background: #333;
+    color: #fff;
+    text-decoration: none;
+    border: none;
+}
+
+/* Disable all hover effects */
+*:hover {
+    transform: none !important;
+    filter: none !important;
+    box-shadow: none !important;
+}
+
+/* Simple media query for responsiveness */
+@media (max-width: 768px) {
+    .car-model-container {
+        height: 200px;
+    }
+}
+
+/* Basic CSS reset for performance */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    background-color: #121212;
+    color: #f5f5f5;
+    overflow-x: hidden;
+    text-rendering: optimizeLegibility;
+}
+
+/* Container for 3D car model - minimalist design */
+.car-model-container {
+    height: 60vh;
+    width: 100%;
+    position: relative;
+    overflow: hidden;
+    background: #000;
+    z-index: 2;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.car-model-container canvas {
+    width: 100% !important;
+    height: 100% !important;
+    transform: scale(1.1);
+}
+
+/* Hero section - simplified */
+.hero {
+    position: relative;
+    min-height: 80vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 2rem;
+    text-align: center;
+    background-color: rgba(0, 0, 0, 0.8);
+    -webkit-backdrop-filter: blur(8px);
+    backdrop-filter: blur(8px);
+}
+
+.hero h1 {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+    background: linear-gradient(45deg, #4285f4, #34a853, #fbbc05, #ea4335);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    font-weight: 800;
+}
+
+.hero p {
     max-width: 800px;
-    margin: 0 auto;
+    margin: 0 auto 2rem;
+    font-size: 1.25rem;
+    line-height: 1.6;
+}
+
+/* Image optimizations */
+img {
+    max-width: 100%;
+    height: auto;
+    will-change: transform;
+}
+
+/* Button styles - simplified */
+.button {
+    display: inline-block;
+    padding: 0.75rem 1.5rem;
+    background-color: #4285f4;
+    color: white;
+    text-decoration: none;
+    border-radius: 4px;
+    font-weight: 600;
+    transition: background-color 0.2s;
+}
+
+.button:hover {
+    background-color: #1a73e8;
+}
+
+/* Media query for mobile */
+@media (max-width: 768px) {
+    .car-model-container {
+        height: 40vh;
+    }
+    
+    .hero h1 {
+        font-size: 2rem;
+    }
+    
+    .hero p {
+        font-size: 1rem;
+    }
+}
+
+/* Safari compatibility fix */
+.backdrop-filter-element {
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
 } 
