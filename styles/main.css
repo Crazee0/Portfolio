@@ -24,55 +24,41 @@
     transform-style: flat !important;
     filter: none !important;
     backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
     text-shadow: none !important;
     box-shadow: none !important;
     background-attachment: scroll !important;
 }
 
 body {
-    background-color: var(--dark-bg);
+    background-color: #000000;
     color: var(--text-primary);
     overflow-x: hidden;
-    background-image: linear-gradient(to bottom, #0a0a0a, #111111 85%, #1a0e0c);
     text-rendering: optimizeSpeed;
+    background-image: url('../images/backgrounds/cross-pattern.jpg');
+    background-repeat: repeat;
+    background-size: 400px auto; /* Adjust size to make pattern larger */
+    background-attachment: fixed;
+    position: relative;
 }
 
 .bg-pattern {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: -1;
-    opacity: 0.25;
-    background-image: 
-        radial-gradient(var(--primary-color) 2px, transparent 2px),
-        radial-gradient(var(--secondary-color) 2px, transparent 2px);
-    background-size: 30px 30px;
-    background-position: 0 0, 15px 15px;
-    animation: patternMove 80s linear infinite;
-    pointer-events: none;
-}
-
-@keyframes patternMove {
-    0% {
-        background-position: 0 0, 15px 15px;
-    }
-    100% {
-        background-position: 100px 100px, 115px 115px;
-    }
+    display: none;
 }
 
 body::before {
+    display: none;
+}
+
+body::after {
     content: '';
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
+    background: rgba(0, 0, 0, 0.7); /* Dark overlay for readability */
     z-index: -1;
-    opacity: 0.05;
-    background-image: url('data:image/svg+xml;charset=utf8,%3Csvg xmlns="http://www.w3.org/2000/svg" width="4" height="4" viewBox="0 0 4 4"%3E%3Cpath fill="%23ffffff" d="M1 3h1v1H1V3zm2-2h1v1H3V1z"%3E%3C/path%3E%3C/svg%3E');
     pointer-events: none;
 }
 
